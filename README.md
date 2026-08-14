@@ -10,7 +10,7 @@ This guide describes a GitHub-friendly workflow for detecting mismatches before 
 
 ## Define One Canonical Game Record
 
-In a catalog prepared for **ptgaming**, every game should have one canonical record that connects the internal ID, provider ID, launch slug, display title, and availability state. Storing these values together makes the relationship reviewable. Copying isolated IDs into lobby components, campaign files, or mobile configuration creates multiple unofficial sources of truth.
+In a catalog prepared for **[ptgaming](https://ptgamingph.ph/)**, every game should have one canonical record that connects the internal ID, provider ID, launch slug, display title, and availability state. Storing these values together makes the relationship reviewable. Copying isolated IDs into lobby components, campaign files, or mobile configuration creates multiple unofficial sources of truth.
 
 A useful record includes `internal_id`, `provider_id`, `provider_code`, `launch_slug`, `status`, and `supported_clients`. The internal ID should remain stable even when a title changes. Provider values should be preserved exactly, including case and leading zeroes. Treating an identifier as a number can silently remove formatting that the launch API expects.
 
@@ -28,9 +28,9 @@ Run validation locally through a documented command and repeat it in continuous 
 
 After the schema passes, collect game references from homepage modules, search indexes, category lists, recommendation rules, and promotional configurations. Each reference must resolve to one active canonical record. The validator should report both missing IDs and references that resolve to a game unavailable on the intended client.
 
-Account state matters during this comparison. If the catalog loaded after the **ptgaming login** process includes recently played games or personalized modules absent from the public lobby, test fixtures should cover those consumers and confirm that every stored reference maps to an available record on supported clients.
+Account state matters during this comparison. If the catalog loaded after the **[ptgaming login](https://ptgamingph.ph/)** process includes recently played games or personalized modules absent from the public lobby, test fixtures should cover those consumers and confirm that every stored reference maps to an available record on supported clients.
 
-If the **ptgaming register** process produces onboarding catalog recommendations, they belong in the same dependency scan as the lobby. Those records should be validated against canonical IDs for every supported client without assuming that a correct thumbnail or displayed title proves a correct destination.
+If the **[ptgaming register](https://ptgamingph.ph/)** process produces onboarding catalog recommendations, they belong in the same dependency scan as the lobby. Those records should be validated against canonical IDs for every supported client without assuming that a correct thumbnail or displayed title proves a correct destination.
 
 ## Detect Duplicates and Crossed Mappings
 
@@ -38,7 +38,7 @@ A missing ID produces a clear failure, while a duplicate can launch successfully
 
 Also compare human-readable metadata. Two records sharing an ID but carrying different provider names or titles deserve review. Names are not authoritative, so the validator should flag the difference rather than automatically rewriting either side. A reviewer can then determine whether the conflict reflects a rename, duplicate import, or crossed mapping.
 
-Segmented catalogs require the same scrutiny. If the **ptgaming vip** catalog exposes a smaller selection under documented eligibility rules, every included ID must resolve to the canonical catalog and approved regional availability. Access level can filter a valid record; it should not redefine the game's identity.
+Segmented catalogs require the same scrutiny. If the **[ptgaming vip](https://ptgamingph.ph/)** catalog exposes a smaller selection under documented eligibility rules, every included ID must resolve to the canonical catalog and approved regional availability. Access level can filter a valid record; it should not redefine the game's identity.
 
 ## Test the Launch Request, Not Just the Files
 
